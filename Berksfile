@@ -1,7 +1,5 @@
 source 'https://supermarket.chef.io/'
 
-metadata
-
 cookbook "application",         github: "poise/application",          tag: "3.0.0"
 cookbook "application_python",  github: "poise/application_python",   ref: "8deb61caa999866843368e9bd0c57250419e5a02"
 cookbook "application_nginx",   github: "poise/application_nginx",    branch: "2.0.0"
@@ -19,4 +17,3 @@ cookbook "python",              github: "poise/python",               ref: "01e5
 cookbook "runit",               github: "hw-cookbooks/runit",         tag: "v1.2.0"
 cookbook "rsyslog",             github: "opscode-cookbooks/rsyslog",  tag: "1.13.0"
 cookbook "sqlite",              github: "opscode-cookbooks/sqlite",   tag: "v1.1.0"
-

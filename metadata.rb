@@ -6,6 +6,10 @@ description      'Installs/Configures cyclesafe_chef'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.0'
 
+unless defined?(Ridley::Chef::Cookbook::Metadata)
+  source_url       'https://github.com/zpallin/cyclesafe_chef.git'
+end
+
 depends 'application', '= 4.1.6'
 depends 'application_python', '= 1.2.2'
 depends 'application_nginx', '= 2.0.0'
