@@ -4,8 +4,17 @@ Used to launch the cyclesafe app
 
 Requirements
 ------------
-- poise/application\_python
-- opscode/mysql
+### Programs
+- Vagrant
+- Chef
+- Berkshelf
+- ChefDK
+
+### Cookbooks
+- poise/application v4.1.6
+- poise/application\_python v1.2.2
+- poise/application\_nginx v2.0.0
+- opscode-cookbooks/mysql v5.5.0
 - opscode/poise
 - opscode/sqlite
 
