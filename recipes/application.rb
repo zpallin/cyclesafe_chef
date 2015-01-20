@@ -5,8 +5,9 @@ include_recipe 'cyclesafe_chef'
 # install dependencies
 package 'libffi-dev'
 
-# assign secret_key value
+# assign secret_key values
 secret_key = data_bag_item('keys','secret_key')['key']
+database_password = data_bag_item('passwords','database')['mysql']
 
 # second secret_key escaped for supervisord pickiness!
 secret_key_supervisord = "#{secret_key.gsub(/%/,'%%')}";
@@ -69,7 +70,7 @@ application app_name do
       database 'cyclesafe'
       adapter 'mysql'
       username 'cyclesafe'
-      password data_bag_item('passwords','database')['mysql']
+      password database_password
       host 'localhost'
       port 3306
     end

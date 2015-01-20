@@ -6,8 +6,8 @@ source 'https://supermarket.chef.io'
 metadata
 
 cookbook "application",         github: "poise/application",          tag: "3.0.0"
-cookbook "application_python",  github: "poise/application_python",   tag: "v3.0.0"
-cookbook "application_nginx",   github: "poise/application_nginx",    tag: "v2.0.2"
+cookbook "application_python",  github: "poise/application_python" 
+cookbook "application_nginx",   github: "poise/application_nginx",    tag: "2.0.0"
 cookbook "apt",                 github: "opscode-cookbooks/apt",      tag: "v2.6.1"
 cookbook "bluepill",            github: "opscode-cookbooks/bluepill", tag: "v2.3.0"
 cookbook "build-essential"
