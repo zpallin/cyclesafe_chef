@@ -46,7 +46,20 @@ end
 
 # symbolic link to websocket, place where django expects it 
 #     (because django isn't smart about mysql sockets yet)
-symlink_destination = "/var/run/mysqld/mysqld.sock"
+symlink_dir = "/var/run/mysqld"
+symlink_destination = "#{symlink_dir}/mysqld.sock"
+
+# make sure mysqld directory exists
+directory symlink_dir do
+  action :create
+  owner 'mysql'
+  group 'mysql'
+  mode 0777
+  recursive true
+  not_if {::File.exists?(symlink_dir)}
+end
+
+# then symlink the socket
 bash 'symlink_mysql socket create' do
   code "ln -s /var/run/mysql-#{db_name}/mysqld.sock #{symlink_destination}"
   user 'root'
