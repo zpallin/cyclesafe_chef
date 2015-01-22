@@ -23,13 +23,6 @@ settings_module = "#{app_name}.settings"
 log_level = node[:cyclesafe_chef][:log_level] || 'debug'
 num_workers = 3
 
-# add cyclesafe user
-user node[:cyclesafe_chef][:user] do
-  system true
-  shell '/bin/bash'
-  home node[:cyclesafe_chef][:directory]
-end
-
 # create shared directory
 directory "#{node[:cyclesafe_chef][:directory]}/shared" do
   user node[:cyclesafe_chef][:user]
@@ -55,13 +48,14 @@ application app_name do
   path node[:cyclesafe_chef][:directory]
   owner node[:cyclesafe_chef][:user]
   group node[:cyclesafe_chef][:group]
-  repository 'https://github.com/zemadi/CycleSafe_deploy.git'
+  repository node[:cyclesafe_chef][:repository]
   revision 'master'
   migrate true
   rollback_on_error false
+  action :deploy
 
   django do
-    requirements node[:cyclesafe_chef][:requirements_file]
+    requirements 'prod_requirements.txt'
     debug true
     packages ['gunicorn']
     settings_template 'settings.py.erb'
@@ -71,11 +65,9 @@ application app_name do
       adapter 'mysql'
       username 'cyclesafe'
       password database_password
-      host 'localhost'
+      host '127.0.0.1'
       port 3306
     end
-
-    database_master_role 'cyclesafe_database'
   end
 
   gunicorn do

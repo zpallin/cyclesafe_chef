@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS `<%= @db_name %>`
+    DEFAULT CHARACTER SET utf8
+    DEFAULT COLLATE utf8_general_ci;
+
+USE 'mysql';
+GRANT ALL PRIVILEGES ON <%= @db_name %>.* TO '<%= @db_user %>'@'localhost' IDENTIFIED BY '<%= @db_pass %>'
+
+WITH GRANT OPTION;
+FLUSH PRIVILEGES;
