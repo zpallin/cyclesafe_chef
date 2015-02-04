@@ -5,7 +5,7 @@ database_password = data_bag_item('passwords','database')['mysql']
 db_name = node[:cyclesafe_chef][:db_name]
 
 mysql_service db_name do
-  version '5.5'
+  version '5.6'
   port '3306'
   bind_address '127.0.0.1'
   initial_root_password database_password
