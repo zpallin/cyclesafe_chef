@@ -4,7 +4,7 @@ maintainer_email 'zpallin@gmail.com'
 license          'All rights reserved'
 description      'Installs/Configures cyclesafe_chef'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.1.3'
+version          '0.1.4'
 
 unless defined?(Ridley::Chef::Cookbook::Metadata)
   source_url       'https://github.com/zpallin/cyclesafe_chef.git'
