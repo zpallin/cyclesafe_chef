@@ -46,10 +46,10 @@ end
 # install django
 application app_name do
   path node[:cyclesafe_chef][:directory]
-  owner node[:cyclesafe_chef][:user]
+  owner node[:cyclesafe_chef][:user] 
   group node[:cyclesafe_chef][:group]
   repository node[:cyclesafe_chef][:repository]
-  revision node[:cyclesafe_chef][:revision]
+  revision node[:cyclesafe_chef][:revision] if node[:cyclesafe_chef][:revision]
   migrate true
   rollback_on_error false
   action :deploy
@@ -85,21 +85,6 @@ application app_name do
     application_socket ["#{sock_file} fail_timeout=0"]
     static_files '/static' => 'app/static'
   end
-end
 
-# supervisor reload resource
-bash 'supervisor_reload' do
-  code "supervisorctl restart #{app_name}"
-  user 'root'
-  action :nothing
-end
-
-# symlink current to local repo
-symlink_directory = "#{node[:cyclesafe_chef][:directory]}/current"
-symlink_destination = "#{node[:cyclesafe_chef][:directory]}/releases/local"
-bash 'deploy_local' do
-  user 'root'
-  code "ln -sfnd #{symlink_destination} #{symlink_directory}"
-  only_if { node[:instance_role] == 'vagrant' }
-  notifies :run, 'bash[supervisor_reload]', :delayed
+  only_if { node[:cyclesafe_chef][:repository] != nil }
 end
