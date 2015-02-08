@@ -1,6 +1,8 @@
 
 # include defaults
 include_recipe 'cyclesafe_chef'
+include_recipe 'runit'
+include_recipe 'python'
 
 # install dependencies
 package 'libffi-dev'
