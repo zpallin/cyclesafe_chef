@@ -1,15 +1,17 @@
 
 
+include_recipe 'cyclesafe_chef'
 
 database_password = data_bag_item('passwords','database')['mysql']
 db_name = node[:cyclesafe_chef][:db_name]
 
 mysql_service db_name do
-  version '5.6'
+  version '5.5'
   port '3306'
   bind_address '127.0.0.1'
   initial_root_password database_password
   action [:create,:start]
+  notifies :run, 'execute[apt-get update]', :immediately
 end
 
 user 'cyclesafe' do
